@@ -1,4 +1,4 @@
-# CLAUDE.md — PDF Reader App with Chat & Table Extraction
+# Architecure Design — PDF Reader App with Chat & Table Extraction
 
 This file defines the architecture, tech stack, conventions, and implementation rules
 for this project. Follow these instructions precisely when generating or modifying code.
