@@ -136,14 +136,6 @@ All paths are relative to the backend root. Configurable via `.env`.
 │   │   ├── pdf_parser.py      # PyMuPDF primary parser + Rust fallback logic
 │   │   ├── ocr.py             # GLM-OCR-MLX runner, caches output to disk
 │   │   └── cache.py           # DiskCache setup and singleton
-│   ├── rust_modules/          # PyO3 Rust source (V2)
-│   │   ├── Cargo.toml
-│   │   ├── pyproject.toml     # maturin config
-│   │   └── src/
-│   │       ├── lib.rs         # PyO3 module root
-│   │       ├── pdf_engine.rs
-│   │       ├── table_extractor.rs
-│   │       └── excel_writer.rs
 │   └── pyproject.toml         # uv project config
 │
 ├── data/                      # Local storage (gitignored)
@@ -224,55 +216,11 @@ PyMuPDF (fitz) ──► primary parser for standard PDFs
 - If cached OCR text exists, skip re-running the model entirely
 - OCR is only triggered when PyMuPDF returns empty or near-empty text extraction
 
-### Rust Modules (V2)
-
-- Build and install with:
-
-  ```bash
-  cd backend/rust_modules
-  maturin develop --uv   # installs into uv-managed venv
-  ```
-
-- All PyO3 functions must accept and return Python-native types (`Vec<u8>`, `Vec<Vec<String>>`, etc.)
-- Rust modules are **optional at runtime** — Python must fall back gracefully if not compiled:
-
-  ```python
-  try:
-      import pdf_engine
-      import table_extractor
-      import excel_writer
-      USE_RUST = True
-  except ImportError:
-      USE_RUST = False
-  ```
-
-- Never put business logic or prompt construction in Rust — only data transformation
-
 ### OpenAI API Usage
 
 - Model: `gpt-4o` (always, unless explicitly told otherwise)
-- Max tokens: `1024` for chat, `2048` for table extraction
+- Max tokens: `1024` for chat
 - Always stream chat responses — never wait for full completion
-- Table extraction must use `tool_use` with a typed schema:
-
-  ```python
-  tools = [{
-      "name": "extract_table",
-      "description": "Extract a structured table from document text",
-      "parameters": {
-          "type": "object",
-          "properties": {
-              "title": {"type": "string"},
-              "headers": {"type": "array", "items": {"type": "string"}},
-              "rows": {
-                  "type": "array",
-                  "items": {"type": "array", "items": {"type": "string"}}
-              }
-          },
-          "required": ["headers", "rows"]
-      }
-  }]
-  ```
 
 ---
 
@@ -348,13 +296,11 @@ GLM_OCR_MODEL_PATH=./models/glm-ocr-mlx  # local model path
 | Concern | Rule |
 |---|---|
 | Same PDF uploaded twice | Cache chunks by SHA-256 with DiskCache; skip re-parsing |
-| PDF > 10MB or complex layout | Use Rust `pdf_engine`, not PyMuPDF |
-| PDF < 10MB, standard layout | PyMuPDF is sufficient, skip Rust overhead |
+| PDF, standard layout | PyMuPDF is sufficient, skip Rust overhead |
 | Scanned/image PDF | Trigger GLM-OCR-MLX; cache result to disk |
 | FAISS index exists on disk | Load from disk, never re-embed |
 | Chat response | Always stream, never block |
-| Excel > 1000 rows | Use Rust `excel_writer` |
-| Excel ≤ 1000 rows | SheetJS client-side is sufficient |
+| Excel | SheetJS client-side is sufficient |
 | Qwen embeddings | Run locally via mlx-lm; never call an external embedding API |
 
 ---
@@ -368,7 +314,6 @@ mkdir -p data/pdfs data/faiss data/cache data/ocr_output
 # 2. Backend
 cd backend
 uv sync
-cd rust_modules && maturin develop --uv && cd ..   # optional, for Rust V2 modules
 uv run fastapi dev main.py
 
 # 3. Frontend
