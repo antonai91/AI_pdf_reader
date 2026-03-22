@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Analysis Dashboard - Lithograph AI</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container": "#eaedff",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "secondary-fixed": "#d5e3fc",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#0c56d0",
+                        "surface": "#faf8ff",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "inverse-primary": "#b2c5ff",
+                        "on-tertiary-container": "#ffc6b2",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#d5e3fc",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "primary": "#003d9b",
+                        "inverse-on-surface": "#eef0ff",
+                        "surface-dim": "#d2d9f4",
+                        "inverse-surface": "#283044",
+                        "secondary": "#515f74",
+                        "on-surface": "#131b2e",
+                        "on-surface-variant": "#434654",
+                        "on-secondary-container": "#57657a",
+                        "surface-variant": "#dae2fd",
+                        "background": "#faf8ff",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "outline": "#737685",
+                        "surface-bright": "#faf8ff",
+                        "surface-container-highest": "#dae2fd",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c3c6d6",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dae2ff",
+                        "tertiary": "#7b2600",
+                        "on-tertiary-fixed": "#380d00",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#a33500",
+                        "on-primary-container": "#c4d2ff",
+                        "on-primary-fixed": "#001848",
+                        "primary-container": "#0052cc",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e2e7ff",
+                        "on-background": "#131b2e",
+                        "surface-container-low": "#f2f3ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-headline {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(218, 226, 253, 0.7);
+            backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+
+<body class="bg-surface-container-low text-on-surface flex h-screen overflow-hidden">
+    <!-- SideNavBar Component -->
+    <aside
+        class="hidden md:flex flex-col h-full py-4 px-3 gap-2 border-r border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 w-64 shrink-0">
+        <div class="px-4 py-6 mb-4">
+            <h2 class="font-manrope text-xs font-semibold uppercase tracking-widest text-slate-500 mb-1">Local Workspace
+            </h2>
+            <p class="text-[10px] text-slate-400 font-medium">Technical Mode</p>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="description">description</span>
+                <span class="font-manrope text-xs font-semibold uppercase tracking-widest">Documents</span>
+            </a>
+            <!-- Active Tab: Analysis -->
+            <a class="flex items-center gap-3 bg-white dark:bg-slate-950 text-blue-700 dark:text-blue-400 rounded-md px-4 py-2 shadow-sm translate-x-1 transition-transform"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                <span class="font-manrope text-xs font-semibold uppercase tracking-widest">Analysis</span>
+            </a>
+            <a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="document_scanner">document_scanner</span>
+                <span class="font-manrope text-xs font-semibold uppercase tracking-widest">OCR</span>
+            </a>
+            <a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                <span class="font-manrope text-xs font-semibold uppercase tracking-widest">Settings</span>
+            </a>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-slate-200/50">
+            <button
+                class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-3 px-4 rounded-xl font-headline font-bold text-sm tracking-tight mb-4 flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Analysis
+            </button>
+            <a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="help">help</span>
+                <span class="font-manrope text-xs font-semibold uppercase tracking-widest">Support</span>
+            </a>
+            <a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="archive">archive</span>
+                <span class="font-manrope text-xs font-semibold uppercase tracking-widest">Archive</span>
+            </a>
+        </div>
+    </aside>
+    <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <!-- TopNavBar Component -->
+        <header
+            class="flex justify-between items-center w-full px-6 h-14 max-w-full bg-slate-50 dark:bg-slate-950 sticky top-0 z-30">
+            <div class="flex items-center gap-8">
+                <span
+                    class="text-xl font-bold tracking-tighter text-slate-900 dark:text-slate-50 font-headline">Lithograph
+                    AI</span>
+                <nav class="hidden lg:flex items-center gap-6 font-manrope text-sm font-medium tracking-tight">
+                    <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
+                        href="#">Documents</a>
+                    <a class="text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 dark:border-blue-400 pb-1"
+                        href="#">Analysis</a>
+                    <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
+                        href="#">OCR</a>
+                    <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
+                        href="#">Settings</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative group">
+                    <span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+                        <span class="material-symbols-outlined text-lg" data-icon="search">search</span>
+                    </span>
+                    <input
+                        class="pl-10 pr-4 py-1.5 bg-slate-100 border-none rounded-full text-xs focus:ring-2 focus:ring-primary/20 w-64"
+                        placeholder="Search workspace..." type="text" />
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors">
+                        <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+                    </button>
+                    <button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors">
+                        <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto p-6 lg:p-10 space-y-10">
+            <!-- Header Section -->
+            <section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span
+                            class="px-2 py-0.5 bg-tertiary-container/10 text-tertiary-container text-[10px] font-bold rounded flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 bg-tertiary-container rounded-full animate-pulse"></span>
+                            LOCAL ENGINE ACTIVE
+                        </span>
+                    </div>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-on-surface font-headline">Insights Dashboard
+                    </h1>
+                    <p class="text-on-surface-variant body-md mt-1">Holistic performance analysis across all
+                        synchronized data stores.</p>
+                </div>
+                <div class="flex gap-3">
+                    <button
+                        class="px-4 py-2 bg-white text-on-surface text-sm font-semibold rounded-xl shadow-sm border border-outline-variant/10 hover:bg-surface-container transition-colors flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span>
+                        Last 30 Days
+                    </button>
+                    <button
+                        class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-xl shadow-md hover:bg-primary-container transition-colors flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm" data-icon="file_download">file_download</span>
+                        Export Report
+                    </button>
+                </div>
+            </section>
+            <!-- Metrics Bento Grid -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Metric 1: Total Extractions -->
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(19,27,46,0.03)] flex flex-col justify-between border-l-4 border-primary">
+                    <div class="flex justify-between items-start">
+                        <span
+                            class="text-on-surface-variant text-xs font-semibold uppercase tracking-wider font-label">Total
+                            Extractions</span>
+                        <div class="p-2 bg-primary/10 text-primary rounded-lg">
+                            <span class="material-symbols-outlined" data-icon="database">database</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="text-4xl font-extrabold tracking-tighter text-on-surface font-headline">124,802
+                        </div>
+                        <div class="flex items-center gap-1 mt-2 text-emerald-600 text-xs font-bold">
+                            <span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            +12.4% <span class="text-on-surface-variant font-normal">vs last month</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Metric 2: Confidence Rate -->
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(19,27,46,0.03)] flex flex-col justify-between border-l-4 border-secondary">
+                    <div class="flex justify-between items-start">
+                        <span
+                            class="text-on-surface-variant text-xs font-semibold uppercase tracking-wider font-label">Confidence
+                            Rate</span>
+                        <div class="p-2 bg-secondary/10 text-secondary rounded-lg">
+                            <span class="material-symbols-outlined" data-icon="verified">verified</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="text-4xl font-extrabold tracking-tighter text-on-surface font-headline">98.4%</div>
+                        <div class="flex items-center gap-1 mt-2 text-emerald-600 text-xs font-bold">
+                            <span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            +0.2% <span class="text-on-surface-variant font-normal">precision peak</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Metric 3: Processing Time -->
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(19,27,46,0.03)] flex flex-col justify-between border-l-4 border-tertiary">
+                    <div class="flex justify-between items-start">
+                        <span
+                            class="text-on-surface-variant text-xs font-semibold uppercase tracking-wider font-label">Processing
+                            Time</span>
+                        <div class="p-2 bg-tertiary/10 text-tertiary rounded-lg">
+                            <span class="material-symbols-outlined" data-icon="speed">speed</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="text-4xl font-extrabold tracking-tighter text-on-surface font-headline">1.2s</div>
+                        <div class="flex items-center gap-1 mt-2 text-primary text-xs font-bold">
+                            <span class="material-symbols-outlined text-sm" data-icon="bolt">bolt</span>
+                            -200ms <span class="text-on-surface-variant font-normal">optimization gain</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Data Visualization Section -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Bar Chart: Document Types -->
+                <div
+                    class="lg:col-span-2 bg-surface-container-lowest p-8 rounded-xl shadow-[0_12px_40px_rgba(19,27,46,0.06)]">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h3 class="text-lg font-bold text-on-surface font-headline">Distribution by Document Type
+                            </h3>
+                            <p class="text-xs text-on-surface-variant">Volume of data processed per category</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <div
+                                class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-low rounded text-[10px] font-bold text-primary">
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                ARCHIVED
+                            </div>
+                            <div
+                                class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-low rounded text-[10px] font-bold text-primary-container">
+                                <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                                ACTIVE
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-64 flex items-end justify-between gap-4 px-2">
+                        <div class="flex-1 flex flex-col items-center gap-3">
+                            <div class="w-full flex flex-col-reverse gap-0.5 h-full max-h-[180px]">
+                                <div class="bg-primary rounded-t-sm w-full h-[60%]"></div>
+                                <div class="bg-primary-container rounded-sm w-full h-[30%]"></div>
+                            </div>
+                            <span
+                                class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Invoices</span>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center gap-3">
+                            <div class="w-full flex flex-col-reverse gap-0.5 h-full max-h-[180px]">
+                                <div class="bg-primary rounded-t-sm w-full h-[40%]"></div>
+                                <div class="bg-primary-container rounded-sm w-full h-[50%]"></div>
+                            </div>
+                            <span
+                                class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Contracts</span>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center gap-3">
+                            <div class="w-full flex flex-col-reverse gap-0.5 h-full max-h-[180px]">
+                                <div class="bg-primary rounded-t-sm w-full h-[85%]"></div>
+                                <div class="bg-primary-container rounded-sm w-full h-[10%]"></div>
+                            </div>
+                            <span
+                                class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Receipts</span>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center gap-3">
+                            <div class="w-full flex flex-col-reverse gap-0.5 h-full max-h-[180px]">
+                                <div class="bg-primary rounded-t-sm w-full h-[30%]"></div>
+                                <div class="bg-primary-container rounded-sm w-full h-[20%]"></div>
+                            </div>
+                            <span
+                                class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Blueprints</span>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center gap-3">
+                            <div class="w-full flex flex-col-reverse gap-0.5 h-full max-h-[180px]">
+                                <div class="bg-primary rounded-t-sm w-full h-[55%]"></div>
+                                <div class="bg-primary-container rounded-sm w-full h-[35%]"></div>
+                            </div>
+                            <span
+                                class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Reports</span>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center gap-3">
+                            <div class="w-full flex flex-col-reverse gap-0.5 h-full max-h-[180px]">
+                                <div class="bg-primary rounded-t-sm w-full h-[20%]"></div>
+                                <div class="bg-primary-container rounded-sm w-full h-[70%]"></div>
+                            </div>
+                            <span
+                                class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Legal</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Secondary Info Card: System Health -->
+                <div class="bg-slate-900 text-white p-8 rounded-xl shadow-xl flex flex-col relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-[60px] rounded-full"></div>
+                    <div class="relative z-10">
+                        <h3 class="text-lg font-bold font-headline mb-1">Local Resource Load</h3>
+                        <p class="text-xs text-slate-400 mb-8">Neural Engine Telemetry</p>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2">
+                                    <span>GPU Utilization</span>
+                                    <span>42%</span>
+                                </div>
+                                <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-blue-400 w-[42%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2">
+                                    <span>NPU Inference</span>
+                                    <span>18%</span>
+                                </div>
+                                <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-blue-400 w-[18%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2">
+                                    <span>VRAM Pressure</span>
+                                    <span>64%</span>
+                                </div>
+                                <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-blue-400 w-[64%]"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-auto pt-10">
+                            <div
+                                class="p-4 bg-slate-800/50 rounded-lg border border-slate-700/50 flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 flex-shrink-0 bg-blue-500/20 rounded-full flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-blue-400"
+                                        data-icon="memory">memory</span>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] font-bold text-slate-400 uppercase">Current Engine</div>
+                                    <div class="text-sm font-semibold">Litho-Core v2.4 (Quantized)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Recent Analysis Table -->
+            <section
+                class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(19,27,46,0.03)] overflow-hidden">
+                <div class="px-8 py-6 border-b border-outline-variant/10 flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-on-surface font-headline">Recent Analysis Activity</h3>
+                    <button class="text-primary text-xs font-bold hover:underline">View All Documents</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-surface-container-low/50">
+                            <tr>
+                                <th
+                                    class="px-8 py-4 text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest">
+                                    Document Entity</th>
+                                <th
+                                    class="px-6 py-4 text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest">
+                                    Type</th>
+                                <th
+                                    class="px-6 py-4 text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest">
+                                    Entities Found</th>
+                                <th
+                                    class="px-6 py-4 text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest">
+                                    Confidence</th>
+                                <th
+                                    class="px-6 py-4 text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest text-right">
+                                    Processed</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant/10">
+                            <tr class="hover:bg-surface-container-low/30 transition-colors group">
+                                <td class="px-8 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="w-10 h-12 bg-surface-container-high rounded flex items-center justify-center border border-outline-variant/20">
+                                            <span class="material-symbols-outlined text-slate-400"
+                                                data-icon="picture_as_pdf">picture_as_pdf</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-bold text-on-surface">INV-2024-001.pdf</div>
+                                            <div class="text-[10px] text-on-surface-variant">SHA256: 4e9c...8f2a</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="px-2 py-1 bg-surface-variant text-on-surface-variant text-[10px] font-bold rounded">INVOICE</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm font-semibold text-on-surface">42 fields</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-20 h-1.5 bg-surface-container rounded-full overflow-hidden">
+                                            <div class="h-full bg-emerald-500 w-[99%]"></div>
+                                        </div>
+                                        <span class="text-[10px] font-bold text-emerald-600">99.2%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-[10px] font-bold text-on-surface-variant text-right">2m ago
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low/30 transition-colors">
+                                <td class="px-8 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="w-10 h-12 bg-surface-container-high rounded flex items-center justify-center border border-outline-variant/20">
+                                            <span class="material-symbols-outlined text-slate-400"
+                                                data-icon="description">description</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-bold text-on-surface">Service_Agreement_v2.docx
+                                            </div>
+                                            <div class="text-[10px] text-on-surface-variant">SHA256: b2a3...11c9</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="px-2 py-1 bg-surface-variant text-on-surface-variant text-[10px] font-bold rounded">LEGAL</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm font-semibold text-on-surface">128 fields</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-20 h-1.5 bg-surface-container rounded-full overflow-hidden">
+                                            <div class="h-full bg-amber-500 w-[82%]"></div>
+                                        </div>
+                                        <span class="text-[10px] font-bold text-amber-600">82.4%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-[10px] font-bold text-on-surface-variant text-right">14m ago
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low/30 transition-colors">
+                                <td class="px-8 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="w-10 h-12 bg-surface-container-high rounded flex items-center justify-center border border-outline-variant/20">
+                                            <span class="material-symbols-outlined text-slate-400"
+                                                data-icon="image">image</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-bold text-on-surface">Receipt_Scan_102.png</div>
+                                            <div class="text-[10px] text-on-surface-variant">SHA256: 09d1...ee42</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="px-2 py-1 bg-surface-variant text-on-surface-variant text-[10px] font-bold rounded">RECEIPT</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm font-semibold text-on-surface">15 fields</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-20 h-1.5 bg-surface-container rounded-full overflow-hidden">
+                                            <div class="h-full bg-emerald-500 w-[95%]"></div>
+                                        </div>
+                                        <span class="text-[10px] font-bold text-emerald-600">95.0%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-[10px] font-bold text-on-surface-variant text-right">1h ago
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- Mobile Nav Anchor -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-slate-200 flex items-center justify-around z-50">
+        <button class="flex flex-col items-center gap-1 text-slate-400">
+            <span class="material-symbols-outlined" data-icon="description">description</span>
+            <span class="text-[10px] font-bold uppercase tracking-tighter">Docs</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-primary">
+            <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+            <span class="text-[10px] font-bold uppercase tracking-tighter border-b border-primary">Analysis</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-slate-400">
+            <span class="material-symbols-outlined" data-icon="document_scanner">document_scanner</span>
+            <span class="text-[10px] font-bold uppercase tracking-tighter">OCR</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-slate-400">
+            <span class="material-symbols-outlined" data-icon="settings">settings</span>
+            <span class="text-[10px] font-bold uppercase tracking-tighter">Settings</span>
+        </button>
+    </nav>
+</body>
+
+</html>

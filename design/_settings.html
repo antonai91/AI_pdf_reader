@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Lithograph AI - Settings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container": "#eaedff",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "secondary-fixed": "#d5e3fc",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#0c56d0",
+                        "surface": "#faf8ff",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "inverse-primary": "#b2c5ff",
+                        "on-tertiary-container": "#ffc6b2",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#d5e3fc",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "primary": "#003d9b",
+                        "inverse-on-surface": "#eef0ff",
+                        "surface-dim": "#d2d9f4",
+                        "inverse-surface": "#283044",
+                        "secondary": "#515f74",
+                        "on-surface": "#131b2e",
+                        "on-surface-variant": "#434654",
+                        "on-secondary-container": "#57657a",
+                        "surface-variant": "#dae2fd",
+                        "background": "#faf8ff",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "outline": "#737685",
+                        "surface-bright": "#faf8ff",
+                        "surface-container-highest": "#dae2fd",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c3c6d6",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dae2ff",
+                        "tertiary": "#7b2600",
+                        "on-tertiary-fixed": "#380d00",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#a33500",
+                        "on-primary-container": "#c4d2ff",
+                        "on-primary-fixed": "#001848",
+                        "primary-container": "#0052cc",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e2e7ff",
+                        "on-background": "#131b2e",
+                        "surface-container-low": "#f2f3ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface flex h-screen overflow-hidden">
+    <!-- SideNavBar (Shared Component) -->
+    <aside
+        class="flex flex-col h-full py-4 px-3 gap-2 border-r border-slate-200 bg-slate-100 dark:bg-slate-900 h-screen w-64 docked left-0">
+        <div class="px-4 mb-6">
+            <div class="flex items-center gap-3 mb-1">
+                <div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
+                    <span class="material-symbols-outlined text-sm">architecture</span>
+                </div>
+                <div>
+                    <h2 class="text-xs font-semibold uppercase tracking-widest text-on-surface">Local Workspace</h2>
+                    <p class="text-[10px] text-on-surface-variant font-medium">Technical Mode</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all font-manrope text-xs font-semibold uppercase tracking-widest"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="description">description</span>
+                <span>Documents</span>
+            </a>
+            <a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all font-manrope text-xs font-semibold uppercase tracking-widest"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                <span>Analysis</span>
+            </a>
+            <a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all font-manrope text-xs font-semibold uppercase tracking-widest"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="document_scanner">document_scanner</span>
+                <span>OCR</span>
+            </a>
+            <!-- Active State: Settings -->
+            <a class="flex items-center gap-3 bg-white dark:bg-slate-950 text-blue-700 dark:text-blue-400 rounded-md px-4 py-2 shadow-sm translate-x-1 transition-transform font-manrope text-xs font-semibold uppercase tracking-widest"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                <span>Settings</span>
+            </a>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-800 space-y-1">
+            <a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all font-manrope text-xs font-semibold uppercase tracking-widest"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="help">help</span>
+                <span>Support</span>
+            </a>
+            <a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all font-manrope text-xs font-semibold uppercase tracking-widest"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="archive">archive</span>
+                <span>Archive</span>
+            </a>
+        </div>
+    </aside>
+    <main class="flex-1 flex flex-col overflow-hidden">
+        <!-- TopNavBar (Shared Component) -->
+        <header
+            class="flex justify-between items-center w-full px-6 h-14 max-w-full bg-slate-50 dark:bg-slate-950 bg-slate-100 dark:bg-slate-900">
+            <div class="flex items-center gap-8">
+                <span
+                    class="text-xl font-bold tracking-tighter text-slate-900 dark:text-slate-50 font-manrope">Lithograph
+                    AI</span>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 font-manrope text-sm font-medium tracking-tight"
+                        href="#">Documents</a>
+                    <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 font-manrope text-sm font-medium tracking-tight"
+                        href="#">Analysis</a>
+                    <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 font-manrope text-sm font-medium tracking-tight"
+                        href="#">OCR</a>
+                    <a class="text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 dark:border-blue-400 pb-1 font-manrope text-sm font-medium tracking-tight"
+                        href="#">Settings</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative group">
+                    <button
+                        class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-on-surface-variant transition-colors">
+                        <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content Canvas -->
+        <div class="flex-1 overflow-y-auto p-8 bg-surface-container-low">
+            <div class="max-w-4xl mx-auto space-y-8">
+                <!-- Page Header -->
+                <div class="mb-10">
+                    <h1 class="text-3xl font-extrabold tracking-tight text-on-surface mb-2">Application Settings</h1>
+                    <p class="text-on-surface-variant text-body-md">Configure your local environment and workspace
+                        preferences.</p>
+                </div>
+                <!-- Bento Grid Layout for Settings -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Section: Storage (Large Card) -->
+                    <div
+                        class="md:col-span-2 bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
+                        <div class="flex items-start justify-between mb-6">
+                            <div>
+                                <h3 class="text-lg font-bold text-on-surface flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary"
+                                        data-icon="folder_open">folder_open</span>
+                                    Local Storage Path
+                                </h3>
+                                <p class="text-on-surface-variant text-sm mt-1">Direct path to your encrypted local
+                                    document vault.</p>
+                            </div>
+                            <div
+                                class="px-3 py-1 bg-tertiary-container/10 text-tertiary text-[10px] font-bold uppercase tracking-widest rounded-sm border border-tertiary/20">
+                                Local-First
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <input
+                                class="flex-1 bg-surface-container-low border-none text-sm font-mono text-on-surface-variant px-4 py-3 rounded-md focus:ring-2 focus:ring-primary/20"
+                                readonly="" type="text" value="/users/lithograph/vault/documents_2024" />
+                            <button
+                                class="bg-gradient-to-br from-primary to-primary-container text-white px-5 py-2 rounded-md font-semibold text-sm hover:opacity-90 transition-opacity">
+                                Browse
+                            </button>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2 text-xs text-on-surface-variant">
+                            <span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                            <span>Path validated. 14.2 GB available.</span>
+                        </div>
+                    </div>
+                    <!-- Section: Appearance (Asymmetric placement) -->
+                    <div
+                        class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-on-surface flex items-center gap-2 mb-4">
+                                <span class="material-symbols-outlined text-primary" data-icon="palette">palette</span>
+                                Interface Theme
+                            </h3>
+                            <div class="space-y-3">
+                                <label
+                                    class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low border border-primary/20 cursor-pointer">
+                                    <span class="text-sm font-semibold text-primary">Light Mode</span>
+                                    <span class="material-symbols-outlined text-primary"
+                                        data-icon="radio_button_checked">radio_button_checked</span>
+                                </label>
+                                <label
+                                    class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-high transition-colors cursor-pointer">
+                                    <span class="text-sm font-medium text-on-surface-variant">Dark Mode</span>
+                                    <span class="material-symbols-outlined text-outline"
+                                        data-icon="radio_button_unchecked">radio_button_unchecked</span>
+                                </label>
+                                <label
+                                    class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-high transition-colors cursor-pointer">
+                                    <span class="text-sm font-medium text-on-surface-variant">System Sync</span>
+                                    <span class="material-symbols-outlined text-outline"
+                                        data-icon="radio_button_unchecked">radio_button_unchecked</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Section: Notifications (Focused Card) -->
+                    <div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
+                        <h3 class="text-lg font-bold text-on-surface flex items-center gap-2 mb-6">
+                            <span class="material-symbols-outlined text-primary"
+                                data-icon="notifications">notifications</span>
+                            Notifications
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-semibold text-on-surface">Analysis Complete</p>
+                                    <p class="text-xs text-on-surface-variant">Alert when OCR finishes processing.</p>
+                                </div>
+                                <div class="w-10 h-5 bg-primary rounded-full relative">
+                                    <div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-semibold text-on-surface">Desktop Toasts</p>
+                                    <p class="text-xs text-on-surface-variant">Show native system alerts.</p>
+                                </div>
+                                <div class="w-10 h-5 bg-outline-variant rounded-full relative">
+                                    <div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Section: Advanced (Wide Bento Bottom) -->
+                    <div
+                        class="md:col-span-2 bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
+                        <div class="flex items-center justify-between mb-8">
+                            <div>
+                                <h3 class="text-lg font-bold text-on-surface flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary"
+                                        data-icon="terminal">terminal</span>
+                                    Advanced Diagnostics
+                                </h3>
+                                <p class="text-on-surface-variant text-sm mt-1">Technical logs and cache management
+                                    tools.</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="flex h-2 w-2 rounded-full bg-tertiary-container animate-pulse"></span>
+                                <span class="text-[10px] font-bold text-tertiary uppercase tracking-widest">Active
+                                    Processing</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button
+                                class="flex items-center justify-between px-6 py-4 bg-surface-container-low rounded-lg hover:bg-surface-container-high transition-all group">
+                                <div class="text-left">
+                                    <span class="block text-sm font-bold text-on-surface">View Error Logs</span>
+                                    <span class="text-xs text-on-surface-variant">Last entry 2m ago</span>
+                                </div>
+                                <span
+                                    class="material-symbols-outlined text-outline group-hover:text-primary transition-colors"
+                                    data-icon="chevron_right">chevron_right</span>
+                            </button>
+                            <button
+                                class="flex items-center justify-between px-6 py-4 bg-surface-container-low rounded-lg hover:bg-surface-container-high transition-all group">
+                                <div class="text-left">
+                                    <span class="block text-sm font-bold text-on-surface">Clear Application Cache</span>
+                                    <span class="text-xs text-on-surface-variant">Reclaim 1.2 GB</span>
+                                </div>
+                                <span
+                                    class="material-symbols-outlined text-outline group-hover:text-error transition-colors"
+                                    data-icon="delete_sweep">delete_sweep</span>
+                            </button>
+                        </div>
+                        <!-- Technical Meta Info -->
+                        <div class="mt-8 pt-6 border-t border-outline-variant/10 flex flex-wrap gap-8">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-sm text-outline"
+                                    data-icon="memory">memory</span>
+                                <span class="text-xs font-mono text-on-surface-variant">Model: LITH-V2-AUTOMATED</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-sm text-outline" data-icon="lan">lan</span>
+                                <span class="text-xs font-mono text-on-surface-variant">Node: LOCAL_HOST_8080</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-sm text-outline"
+                                    data-icon="info">info</span>
+                                <span class="text-xs font-mono text-on-surface-variant">Build: 0.8.4-STABLE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Subtle Save Footer -->
+                <div class="mt-12 flex items-center justify-end gap-4 pb-12">
+                    <button
+                        class="text-primary text-sm font-bold px-6 py-2 hover:bg-primary/5 transition-colors rounded-md">Discard
+                        Changes</button>
+                    <button
+                        class="bg-gradient-to-br from-primary to-primary-container text-white px-8 py-3 rounded-md font-bold tracking-tight shadow-md hover:opacity-90 transition-opacity">
+                        Save Configuration
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Visual Polish: Backdrop blur for navigation on scroll would go here if JS was allowed -->
+    <div class="fixed bottom-6 right-6 pointer-events-none opacity-50 grayscale">
+        <img alt="Lithograph Brand Pattern" class="w-32 h-32 object-contain"
+            data-alt="Abstract geometric technical blueprint pattern in slate"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwtqfP32t-eD1L6zPDglZ9lCG_ufHU1SalU25rbfnpr-OUMEQAqXrFISLATXub1VrV9fBbTz4Tr2zmGL5XYVsWVNSyRcM1Dsjjyno6DYZ7ziysMhu8no_3Cw4-l6_GHo-UwnUWJn96V5nvyEgaN7GAPhzlrZX-qr1528I5eestlRTqWztpsr7h09Fb9NNrzs9hgcaROoigaKyiF68DP9ceYZhn6mJaXbvOGXGxPsUc0oLdXtKmcO1OhPCcZJT8ViuuqP4x1UoCePJG" />
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Lithograph AI - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#0052cc",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#ffc6b2",
+                        "tertiary": "#7b2600",
+                        "outline": "#737685",
+                        "background": "#faf8ff",
+                        "inverse-primary": "#b2c5ff",
+                        "surface-tint": "#0c56d0",
+                        "secondary-container": "#d5e3fc",
+                        "secondary-fixed": "#d5e3fc",
+                        "primary-fixed": "#dae2ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#c4d2ff",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "surface-dim": "#d2d9f4",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "on-background": "#131b2e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#ffdbcf",
+                        "on-primary-fixed": "#001848",
+                        "outline-variant": "#c3c6d6",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "surface-container-highest": "#dae2fd",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#57657a",
+                        "inverse-surface": "#283044",
+                        "secondary": "#515f74",
+                        "inverse-on-surface": "#eef0ff",
+                        "tertiary-container": "#a33500",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#dae2fd",
+                        "primary": "#003d9b",
+                        "on-surface": "#131b2e",
+                        "surface-bright": "#faf8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#faf8ff",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "surface-container": "#eaedff",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#434654",
+                        "surface-container-high": "#e2e7ff",
+                        "on-tertiary-fixed": "#380d00",
+                        "surface-container-low": "#f2f3ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f2f3ff;
+            /* surface-container-low */
+        }
+
+        .glass-panel {
+            background: rgba(218, 226, 253, 0.7);
+            backdrop-filter: blur(12px);
+        }
+
+        .canvas-shadow {
+            box-shadow: 0 12px 40px rgba(19, 27, 46, 0.06);
+        }
+    </style>
+</head>
+
+<body class="text-on-surface">
+    <header
+        class="flex justify-between items-center w-full px-6 h-14 bg-slate-50/70 backdrop-blur-md sticky top-0 z-50">
+        <div class="flex items-center gap-8">
+            <span class="text-lg font-bold text-slate-900 dark:text-slate-50 tracking-tighter font-headline">Lithograph
+                AI</span>
+            <nav class="hidden md:flex gap-6 items-center h-full">
+                <a class="font-manrope text-sm font-medium tracking-tight text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 dark:border-blue-400 pb-1"
+                    href="#">Documents</a>
+                <a class="font-manrope text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+                    href="#">Analysis</a>
+                <a class="font-manrope text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+                    href="#">OCR</a>
+                <a class="font-manrope text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+                    href="#">Settings</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="relative hidden sm:block">
+                <span
+                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+                <input
+                    class="bg-surface-container-lowest border-none rounded-xl pl-10 pr-4 py-1.5 text-sm w-64 focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-on-surface-variant/50"
+                    placeholder="Search local library..." type="text" />
+            </div>
+            <button
+                class="p-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full transition-colors active:opacity-80">
+                <span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+            </button>
+            <button
+                class="p-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full transition-colors active:opacity-80">
+                <span class="material-symbols-outlined text-on-surface-variant">settings</span>
+            </button>
+        </div>
+    </header>
+    <div class="flex">
+        <aside
+            class="flex flex-col h-screen fixed left-0 top-0 pt-16 pb-4 px-3 z-40 bg-slate-100 dark:bg-slate-900 w-64 border-r-0 overflow-y-auto">
+            <div class="px-3 mb-8">
+                <div class="flex items-center gap-3 p-2">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container">
+                        <span class="material-symbols-outlined" data-weight="fill"
+                            style="font-variation-settings: 'FILL' 1;">terminal</span>
+                    </div>
+                    <div>
+                        <div class="font-headline font-bold text-sm tracking-tight">Workspace</div>
+                        <div
+                            class="font-inter text-[10px] text-on-surface-variant uppercase tracking-widest font-semibold">
+                            Local-First Engine</div>
+                    </div>
+                </div>
+            </div>
+            <nav class="flex-1 space-y-6">
+                <div class="space-y-1">
+                    <a class="flex items-center gap-3 px-4 py-2.5 bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 shadow-sm rounded-md font-inter text-xs font-semibold uppercase tracking-widest hover:translate-x-1 transition-transform duration-200"
+                        href="#">
+                        <span class="material-symbols-outlined" data-weight="fill"
+                            style="font-variation-settings: 'FILL' 1;">folder_open</span>
+                        Library
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-md font-inter text-xs font-semibold uppercase tracking-widest hover:translate-x-1 transition-transform duration-200"
+                        href="#">
+                        <span class="material-symbols-outlined">star</span>
+                        Favorites
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-md font-inter text-xs font-semibold uppercase tracking-widest hover:translate-x-1 transition-transform duration-200"
+                        href="#">
+                        <span class="material-symbols-outlined">history</span>
+                        History
+                    </a>
+                </div>
+                <div class="px-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <span
+                            class="font-inter text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Local
+                            Folders</span>
+                        <button class="text-on-surface-variant hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined text-sm">add</span>
+                        </button>
+                    </div>
+                    <div class="space-y-1">
+                        <a class="flex items-center gap-2 px-2 py-1.5 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-md transition-colors group"
+                            href="#">
+                            <span class="material-symbols-outlined text-lg">folder</span>
+                            <span class="text-xs font-medium truncate">Project_Alpha</span>
+                        </a>
+                        <a class="flex items-center gap-2 px-2 py-1.5 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-md transition-colors group"
+                            href="#">
+                            <span class="material-symbols-outlined text-lg">folder</span>
+                            <span class="text-xs font-medium truncate">Q3_Reports</span>
+                        </a>
+                        <a class="flex items-center gap-2 px-2 py-1.5 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-md transition-colors group"
+                            href="#">
+                            <span class="material-symbols-outlined text-lg">folder</span>
+                            <span class="text-xs font-medium truncate">Blueprints_2024</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+            <div class="px-3 mt-auto pt-6">
+                <button
+                    class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary py-3 rounded-xl font-headline font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity active:scale-95 mb-6">
+                    <span class="material-symbols-outlined text-lg">add</span>
+                    Import PDF
+                </button>
+                <div class="space-y-1">
+                    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-md font-inter text-[10px] font-semibold uppercase tracking-widest transition-all"
+                        href="#">
+                        <span class="material-symbols-outlined text-sm">cloud_off</span>
+                        Cloud Sync
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-md font-inter text-[10px] font-semibold uppercase tracking-widest transition-all"
+                        href="#">
+                        <span class="material-symbols-outlined text-sm">database</span>
+                        Storage
+                    </a>
+                </div>
+            </div>
+        </aside>
+        <main class="flex-1 ml-64 p-8 min-h-screen">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                    <div>
+                        <h1 class="font-headline font-extrabold text-3xl text-on-surface tracking-tight">Your Library
+                        </h1>
+                        <p class="text-on-surface-variant font-body text-sm mt-1">Managing 12 locally stored
+                            architectural documents.</p>
+                    </div>
+                    <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
+                        <button
+                            class="px-4 py-2 bg-surface-container-highest text-on-surface-variant text-xs font-semibold rounded-full hover:bg-surface-container-high transition-colors flex items-center gap-2 whitespace-nowrap">
+                            <span class="material-symbols-outlined text-sm">filter_list</span>
+                            All Types
+                        </button>
+                        <button
+                            class="px-4 py-2 bg-surface-container-highest text-on-surface-variant text-xs font-semibold rounded-full hover:bg-surface-container-high transition-colors flex items-center gap-2 whitespace-nowrap">
+                            <span class="material-symbols-outlined text-sm">label</span>
+                            Tags
+                        </button>
+                        <button
+                            class="px-4 py-2 bg-surface-container-highest text-on-surface-variant text-xs font-semibold rounded-full hover:bg-surface-container-high transition-colors flex items-center gap-2 whitespace-nowrap">
+                            <span class="material-symbols-outlined text-sm">calendar_today</span>
+                            Recent
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-12 gap-8">
+                    <div class="col-span-12 lg:col-span-9 space-y-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                            <div
+                                class="group bg-surface-container-lowest rounded-xl p-4 canvas-shadow border border-transparent hover:border-primary/10 transition-all cursor-pointer">
+                                <div class="aspect-[3/4] rounded-lg mb-4 overflow-hidden bg-surface-container relative">
+                                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                                        data-alt="Technical architectural blueprint schematic on paper"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwlXhgDodts1r8va39czGKhwNRg1f1OWoP-UNk3zby-KUj3yCyErGCP6Bm71L19pS-XAyKOB9tdRp5bt8MQeXdsiVjzTcF18p3OxiQxMtxxApdN3paGaMIw7WIZ9gebUFOcmD9csVea5koJ4yM908whlwFOyUe5PEUQSbzPLoaIAzy2M3_mJ8cE_ZD6rYo-HuOloEOT9GO8f4ZRYWPSDLJ0jTBSZSLpsobQTLgZytWqGOSlH1h0jaGMD3W4bePu70LleZRym4_aM3w" />
+                                    <div
+                                        class="absolute top-2 right-2 px-2 py-1 bg-white/90 backdrop-blur rounded-md text-[10px] font-bold font-inter text-primary uppercase">
+                                        PDF</div>
+                                </div>
+                                <h3 class="font-headline font-bold text-sm text-on-surface truncate">
+                                    Structure_Analysis_Rev2.pdf</h3>
+                                <div class="flex items-center justify-between mt-2">
+                                    <span
+                                        class="text-[10px] font-medium text-on-surface-variant font-body uppercase">14.2
+                                        MB • 2 days ago</span>
+                                    <div class="flex -space-x-1">
+                                        <div
+                                            class="w-5 h-5 rounded-full bg-blue-100 border border-white text-[8px] flex items-center justify-center text-blue-600 font-bold">
+                                            A</div>
+                                        <div
+                                            class="w-5 h-5 rounded-full bg-slate-100 border border-white text-[8px] flex items-center justify-center text-slate-600 font-bold">
+                                            +2</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="group bg-surface-container-lowest rounded-xl p-4 canvas-shadow border border-transparent hover:border-primary/10 transition-all cursor-pointer">
+                                <div class="aspect-[3/4] rounded-lg mb-4 overflow-hidden bg-surface-container relative">
+                                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                                        data-alt="Brutalist concrete building architectural detail photo"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1rJBPJS5XU2bv7zv-q3iDZdvHUMm6Um41p2R2p1tSZzDU4yPqSSAfatvrY9TNb8ljH7ZdMm9DMbvDH5HV9u0EyTFy9qix09eaX-o5z7ZqKNkBrmqsfQdy7m41eyshoeoU5WHY43XJYKLhi9FLTLKoK4iZSummOFvwcbAIHIJ4CJrqF2rgXICKocU-GT_15B5cF76jQ6XtCvDSBBvwB-UYRMrndlbobSCV0ciXw0kuseqFR2SMXBgAeWllS75Astu9rWkeMBiTMeEG" />
+                                    <div
+                                        class="absolute top-2 right-2 px-2 py-1 bg-white/90 backdrop-blur rounded-md text-[10px] font-bold font-inter text-primary uppercase">
+                                        PDF</div>
+                                </div>
+                                <h3 class="font-headline font-bold text-sm text-on-surface truncate">
+                                    Site_Survey_Final.pdf</h3>
+                                <div class="flex items-center justify-between mt-2">
+                                    <span
+                                        class="text-[10px] font-medium text-on-surface-variant font-body uppercase">8.5
+                                        MB • 5 days ago</span>
+                                    <span class="material-symbols-outlined text-amber-500 text-sm"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                </div>
+                            </div>
+                            <div
+                                class="group bg-surface-container-lowest rounded-xl p-4 canvas-shadow border border-transparent hover:border-primary/10 transition-all cursor-pointer">
+                                <div class="aspect-[3/4] rounded-lg mb-4 overflow-hidden bg-surface-container relative">
+                                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                                        data-alt="Electrical wiring diagram and technical specifications"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo1J9X67XMqItE22_cn322RU-lZ0-Of9lgCD00lzTa5Ket55YrJtFVr8C8Vv9W7FOWVFgmSQhvF0h16OFsqCQGu4tx7mb_13Li5JQs4Ek2B8lYq8ol9cIWFL8rRB1tClQYhb7r2wOJKaVo1y3G5E2GMs3jsV47iBaCGXW2X1V2VBil7Fdyf0UiLEUZDXvFzsn0e3OLsETR5AkoUAGNdUR6g2LVIL7sp0xjKR-_BOgVEIoDPi7AKwGYPJ7G9EhjWsVejenAxmskKisU" />
+                                    <div
+                                        class="absolute top-2 right-2 px-2 py-1 bg-white/90 backdrop-blur rounded-md text-[10px] font-bold font-inter text-primary uppercase">
+                                        PDF</div>
+                                    <div class="absolute inset-0 bg-primary/20 flex items-center justify-center">
+                                        <div class="bg-white/95 px-3 py-2 rounded-lg flex items-center gap-2">
+                                            <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                                            <span class="text-[10px] font-bold text-primary">OCR Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="font-headline font-bold text-sm text-on-surface truncate">
+                                    Electrical_Schematics.pdf</h3>
+                                <div class="flex items-center justify-between mt-2">
+                                    <span
+                                        class="text-[10px] font-medium text-on-surface-variant font-body uppercase">45.1
+                                        MB • Today</span>
+                                    <div class="h-1 w-12 bg-surface-container rounded-full overflow-hidden">
+                                        <div class="h-full bg-primary w-2/3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-surface-container-high/30 rounded-2xl p-12 border-2 border-dashed border-outline-variant/30 flex flex-col items-center text-center">
+                            <div
+                                class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+                            </div>
+                            <h2 class="font-headline font-bold text-xl mb-2">Build your local archive</h2>
+                            <p class="text-on-surface-variant text-sm max-w-sm font-body mb-8">All processing happens on
+                                your machine. No data ever leaves your device unless you choose to sync.</p>
+                            <button
+                                class="bg-surface-container-lowest text-on-surface px-6 py-2.5 rounded-xl text-sm font-bold canvas-shadow hover:bg-white transition-all flex items-center gap-2 border border-outline-variant/20">
+                                <span class="material-symbols-outlined text-lg">add_circle</span>
+                                Select Files
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-span-12 lg:col-span-3 space-y-6">
+                        <div class="bg-surface-container-lowest rounded-2xl p-5 canvas-shadow">
+                            <h4
+                                class="font-inter text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-4 flex items-center justify-between">
+                                Local Engine Status
+                                <div class="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-0.5 p-1.5 bg-tertiary-container/10 rounded-lg">
+                                        <span
+                                            class="material-symbols-outlined text-tertiary-container text-lg">psychology</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="text-xs font-bold font-headline mb-1">OCR Processing</div>
+                                        <div class="text-[10px] text-on-surface-variant mb-2">Analyzing
+                                            'Electrical_Sch...'</div>
+                                        <div class="h-1 w-full bg-surface-container rounded-full overflow-hidden">
+                                            <div class="h-full bg-primary w-[72%] transition-all duration-1000"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 opacity-60">
+                                    <div class="mt-0.5 p-1.5 bg-secondary-container/30 rounded-lg">
+                                        <span
+                                            class="material-symbols-outlined text-secondary text-lg">model_training</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="text-xs font-bold font-headline mb-1">Vector Indexing</div>
+                                        <div class="text-[10px] text-on-surface-variant italic">Waiting for queue...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-gradient-to-br from-inverse-surface to-[#131b2e] rounded-2xl p-5 text-white shadow-xl overflow-hidden relative">
+                            <div
+                                class="absolute -right-4 -top-4 w-24 h-24 bg-primary-container/20 rounded-full blur-2xl">
+                            </div>
+                            <h4
+                                class="font-inter text-[10px] font-bold uppercase tracking-widest text-on-primary-container/60 mb-4">
+                                Storage Insights</h4>
+                            <div class="mb-6">
+                                <div class="text-3xl font-extrabold font-headline leading-tight">1.2 GB</div>
+                                <div class="text-[10px] text-on-primary-container/80 uppercase tracking-tighter">Total
+                                    Local Storage used</div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-[10px]">
+                                    <span class="text-white/60">Documents</span>
+                                    <span>840 MB</span>
+                                </div>
+                                <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="h-full bg-primary-container w-[65%]"></div>
+                                </div>
+                                <div class="flex items-center justify-between text-[10px] mt-3">
+                                    <span class="text-white/60">AI Models</span>
+                                    <span>380 MB</span>
+                                </div>
+                                <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="h-full bg-tertiary-fixed-dim w-[30%]"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-surface-container-high rounded-2xl p-5">
+                            <h4
+                                class="font-inter text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-4">
+                                Quick Tags</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-2 py-1 bg-surface-container-lowest text-[10px] font-bold rounded-md border border-outline-variant/10 text-on-secondary-container">#blueprint</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-lowest text-[10px] font-bold rounded-md border border-outline-variant/10 text-on-secondary-container">#legal</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-lowest text-[10px] font-bold rounded-md border border-outline-variant/10 text-on-secondary-container">#technical</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-lowest text-[10px] font-bold rounded-md border border-outline-variant/10 text-on-secondary-container">#invoice</span>
+                                <span
+                                    class="px-2 py-1 bg-primary/5 text-primary text-[10px] font-bold rounded-md border border-primary/20">+
+                                    Add New</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div
+        class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-50/90 backdrop-blur-lg px-6 py-3 flex justify-between items-center z-50">
+        <button class="flex flex-col items-center gap-1 text-blue-700">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">folder_open</span>
+            <span class="text-[10px] font-bold uppercase tracking-tighter">Library</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-slate-500">
+            <span class="material-symbols-outlined">search</span>
+            <span class="text-[10px] font-bold uppercase tracking-tighter">Search</span>
+        </button>
+        <button class="w-12 h-12 bg-primary rounded-full -mt-10 shadow-lg flex items-center justify-center text-white">
+            <span class="material-symbols-outlined">add</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-slate-500">
+            <span class="material-symbols-outlined">history</span>
+            <span class="text-[10px] font-bold uppercase tracking-tighter">History</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-slate-500">
+            <span class="material-symbols-outlined">account_circle</span>
+            <span class="text-[10px] font-bold uppercase tracking-tighter">Profile</span>
+        </button>
+    </div>
+</body>
+
+</html>
