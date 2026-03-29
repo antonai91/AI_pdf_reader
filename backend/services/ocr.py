@@ -45,7 +45,12 @@ class OCRService:
             # Some mlx-vlm models expect <image> in the prompt, some just take the image list.
             # GLM models usually work fine with standard mlx-vlm generate wrapper.
             response = generate(self.model, self.processor, prompt, images, verbose=False)
-            return response
+            if hasattr(response, 'text'):
+                return response.text
+            elif isinstance(response, str):
+                return response
+            else:
+                return str(response)
         except Exception as e:
             raise RuntimeError(f"Failed to generate OCR output: {e}")
         finally:
