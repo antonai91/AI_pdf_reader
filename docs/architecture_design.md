@@ -32,7 +32,6 @@ Everything runs on the user's machine. No cloud services, no external storage, n
 │         FastAPI Backend (Python)           │
 │  - OpenAI SDK (GPT-4o chat + tool use)     │
 │  - LangChain + FAISS RAG pipeline          │
-│  - mlx-lm Qwen embeddings (local)          │
 │  - GLM-OCR-MLX (local OCR)                 │
 │  - DiskCache (chunk + embedding cache)     │
 │                                            │
@@ -69,7 +68,6 @@ Everything runs on the user's machine. No cloud services, no external storage, n
 - **Framework**: FastAPI (Python 3.12+)
 - **Package manager**: `uv` (never use pip directly)
 - **AI SDK**: `openai` (official Python SDK, streaming enabled, GPT-4o)
-- **Embeddings**: `mlx-lm` with **Qwen embedding model** — runs fully local via Apple MLX
 - **RAG pipeline**: `langchain` + `langchain-community` with **FAISS** vector store
 - **Vector store**: FAISS (local, persisted to `./data/faiss/`)
 - **PDF parsing**: `PyMuPDF` (`fitz`) — primary parser for all PDF text and layout extraction
